@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9d7a63d-f4ed-4782-a6f5-1c6b9cb68416" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/iut-project/lib/migrations/0-user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/iut-project/lib/models/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iut-project/lib/plugins/@hapipal.schmervice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iut-project/lib/services/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iut-project/server/manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/iut-project/server/manifest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iut-project/lib/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/iut-project/lib/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iut-project/lib/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/iut-project/lib/routes/user.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +116,7 @@
       <workItem from="1738771578200" duration="346000" />
       <workItem from="1738835397877" duration="308000" />
       <workItem from="1739973405638" duration="915000" />
-      <workItem from="1740235396431" duration="6139000" />
+      <workItem from="1740235396431" duration="7119000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -237,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740241112942</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1740242001885</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1740242001885</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
