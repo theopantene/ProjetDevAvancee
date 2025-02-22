@@ -1,31 +1,47 @@
 'use strict';
 
-const Glue = require('@hapi/glue');
-const Exiting = require('exiting');
-const Manifest = require('./manifest');
+const Hapi = require('@hapi/hapi');
+const Schmervice = require('@hapipal/schmervice');
+const { Model } = require('objection');
+const Knex = require('knex');
+const knexConfig = require('../knexfile');
 
-exports.deployment = async ({ start } = {}) => {
+const init = async () => {
 
-    const manifest = Manifest.get('/', process.env);
-    const server = await Glue.compose(manifest, { relativeTo: __dirname });
+    const server = Hapi.server({
+        port: 3000,
+        host: 'localhost'
+    });
 
-    if (start) {
-        await Exiting.createManager(server).start();
-        server.log(['start'], `Server started at ${server.info.uri}`);
-        return server;
-    }
+    const knex = Knex(knexConfig.development);
+    Model.knex(knex);
 
-    await server.initialize();
+    await server.register([
+        Schmervice,
+        require('../plugins/swagger')
+    ]);
 
-    return server;
+    server.registerService([
+        require('./services/user'),
+        require('./services/mail'),
+        require('./services/movie'),
+        require('./services/favorite')
+    ]);
+
+    server.route([
+        ...require('./routes/user'),
+        ...require('./routes/movie'),
+        ...require('./routes/favorite'),
+        ...require('./routes/export')
+    ]);
+
+    await server.start();
+    console.log('Server running on %s', server.info.uri);
 };
 
-if (require.main === module) {
+process.on('unhandledRejection', (err) => {
+    console.log(err);
+    process.exit(1);
+});
 
-    exports.deployment({ start: true });
-
-    process.on('unhandledRejection', (err) => {
-
-        throw err;
-    });
-}
+init();
