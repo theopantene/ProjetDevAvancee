@@ -1,21 +1,26 @@
+// knexfile.js
 'use strict';
 
-const Path = require('path');
-const Hoek = require('@hapi/hoek');
-const Manifest = require('./server/manifest');
-const Plugin = require('./lib/plugins/@hapipal.schwifty');
-
-// Take schwifty registration's knex option
-// but specify the plugin's migrations directory
-
-module.exports = Hoek.applyToDefaults(
-    {
-        migrations: {
-            directory: Path.relative(process.cwd(), Plugin.options.migrationsDir)
+module.exports = {
+    development: {
+        client: 'mysql',
+        connection: {
+            host: process.env.DB_HOST || '0.0.0.0',
+            user: process.env.DB_USER || 'root',
+            password: process.env.DB_PASSWORD || 'hapi',
+            database: process.env.DB_DATABASE || 'user',
+            port: process.env.DB_PORT || 3306
         }
     },
-    Manifest
-        .get('/register/plugins', process.env)
-        .find(({ plugin }) => plugin === '@hapipal/schwifty')
-        .options.knex
-);
+    production: {
+        client: 'mysql',
+        connection: process.env.DATABASE_URL,
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: 'knex_migrations'
+        }
+    }
+};
